@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code ABQ — May 2026</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/simple.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap">
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+  <style>
+    :root {
+      --bg-primary: #f7f3ec;
+      --bg-card: #ede6d6;
+      --bg-card-soft: #f1ead8;
+      --text-heading: #1a1a1a;
+      --text-body: #555555;
+      --text-dim: #999999;
+      --accent: #d97757;
+      --accent-deep: #b85a3c;
+      --border: #d8cfba;
+      --dd-gold: #b88c1e;
+      --dd-teal: #2a5a6a;
+    }
+
+    html, body {
+      background-color: var(--bg-primary);
+    }
+
+    .reveal {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text-body);
+      font-weight: 400;
+    }
+
+    .reveal .slides section {
+      background-color: var(--bg-primary);
+      text-align: left;
+    }
+
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+      font-family: 'Source Serif 4', 'Source Serif Pro', Georgia, serif;
+      color: var(--text-heading);
+      font-weight: 700;
+      text-transform: none;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5em;
+    }
+
+    .reveal h1 { font-size: 2.6em; line-height: 1.05; }
+    .reveal h2 { font-size: 1.9em; line-height: 1.15; }
+    .reveal h3 { font-size: 1.45em; line-height: 1.2; }
+
+    .reveal p { line-height: 1.6; color: var(--text-body); }
+
+    .reveal strong { color: var(--text-heading); font-weight: 600; }
+
+    .reveal a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .reveal a:hover { color: var(--accent-deep); }
+
+    .reveal ul { list-style: none; padding-left: 0; }
+    .reveal ul li {
+      position: relative;
+      padding-left: 1.2em;
+      margin-bottom: 0.45em;
+    }
+    .reveal ul li::before {
+      content: '·';
+      color: var(--accent);
+      position: absolute;
+      left: 0.2em;
+      top: -0.2em;
+      font-size: 1.6em;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    /* Coral left bar — same mechanism as the title slide for consistency.
+       Wrap section content in <div class="bar-content"> to get the bar. */
+    .with-bar { padding: 0 !important; }
+    .with-bar .bar-content {
+      margin-left: 6%;
+      padding-left: 36px;
+      border-left: 10px solid var(--accent);
+    }
+
+    .accent { color: var(--accent) !important; }
+    .dim-text { color: var(--text-dim); }
+    .small-text { font-size: 0.65em; }
+
+    .meta-row {
+      color: var(--text-dim);
+      font-size: 0.85em;
+      letter-spacing: 0.02em;
+    }
+    .meta-row .sep {
+      color: var(--accent);
+      margin: 0 0.6em;
+      font-weight: 700;
+    }
+
+    /* QR — black on cream, no white box */
+    .qr-container {
+      position: absolute;
+      bottom: 60px;
+      right: 80px;
+      text-align: center;
+    }
+    .qr-container .qr-caption {
+      margin-top: 0.8em;
+      font-size: 0.85em;
+      color: var(--text-body);
+      line-height: 1.3;
+    }
+    .qr-container .qr-caption strong {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* ===== TITLE SLIDE — social-card style ===== */
+    .title-slide {
+      padding: 0 !important;
+    }
+    .title-slide .title-content {
+      position: absolute;
+      left: 6%;
+      top: 22%;
+      width: 55%;
+      padding-left: 36px;
+      border-left: 10px solid var(--accent);
+    }
+    .title-slide h1 {
+      font-size: 3.2em;
+      line-height: 1.02;
+      margin: 0 0 0.5em 0;
+    }
+    .title-slide .subtitle {
+      font-size: 0.95em;
+      line-height: 1.55;
+      color: var(--text-body);
+      margin: 0 0 1.8em 0;
+    }
+    .title-slide .tonight {
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      font-size: 1.05em;
+      margin: 0 0 0.6em 0;
+      font-family: 'Inter', sans-serif;
+    }
+    .title-slide .when,
+    .title-slide .where {
+      font-size: 0.95em;
+      line-height: 1.4;
+      margin: 0 0 0.9em 0;
+    }
+    .title-slide .where strong { color: var(--text-heading); }
+    .title-slide .details {
+      font-size: 0.85em;
+      color: var(--text-dim);
+      margin-top: 1.2em;
+    }
+    .title-slide .details .sep {
+      color: var(--accent);
+      margin: 0 0.5em;
+      font-weight: 700;
+    }
+    .title-slide .qr-block {
+      position: absolute;
+      right: 8%;
+      top: 30%;
+      text-align: center;
+    }
+    .title-slide .qr-block .qr-caption {
+      margin-top: 1.2em;
+      font-size: 1em;
+      color: var(--text-body);
+      line-height: 1.4;
+    }
+    .title-slide .qr-block .qr-caption strong {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 1.15em;
+    }
+
+    /* ===== PRESENTER / AGENDA CARDS ===== */
+    .presenter-card {
+      background: var(--bg-card-soft);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.3em 1.8em;
+      text-align: left;
+      max-width: 880px;
+      margin: 0.7em auto;
+    }
+    .presenter-card h3 {
+      margin: 0 0 0.35em 0;
+      font-size: 1.3em;
+    }
+    .presenter-card p {
+      margin: 0;
+      color: var(--text-body);
+      font-size: 0.95em;
+    }
+    .presenter-card p.tagline {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .stretch-card {
+      border-left: 5px solid var(--accent);
+      background: var(--bg-card);
+    }
+    .stretch-card h3 .stretch-label {
+      font-size: 0.55em;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      margin-left: 0.6em;
+      vertical-align: middle;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+    }
+
+    /* ===== DEEP DIVE SLIDE ===== */
+    .dd-slide h2 {
+      color: var(--dd-teal);
+    }
+    .dd-slide a {
+      color: var(--dd-gold) !important;
+    }
+    .dd-badge {
+      display: inline-block;
+      background: var(--dd-teal);
+      color: #f4e7b8;
+      padding: 0.35em 0.95em;
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75em;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+
+    /* ===== CLOSING SLIDE ===== */
+    .closing-slide {
+      text-align: center !important;
+    }
+    .closing-slide h2 {
+      font-size: 3em;
+      margin: 0 0 0.7em 0;
+    }
+    /* Closing card — mirrors the title slide's vertical-bar treatment */
+    .closing-slide .closing-card {
+      display: inline-block;
+      text-align: center;
+      padding-left: 36px;
+      border-left: 10px solid var(--accent);
+    }
+    /* Force both QRs to the same rendered size despite different URL lengths */
+    .closing-slide .qr-row .qr-block svg {
+      width: 220px;
+      height: 220px;
+      display: block;
+    }
+    .closing-slide .qr-row {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 6em;
+      margin: 1em auto 1.2em;
+    }
+    .closing-slide .qr-row .qr-block { text-align: center; }
+    .closing-slide .qr-row .qr-block .qr-svg { width: 220px; margin: 0 auto; }
+    .closing-slide .qr-row .qr-block .qr-caption {
+      margin-top: 0.7em;
+      font-size: 0.9em;
+      color: var(--text-body);
+      line-height: 1.35;
+    }
+    .closing-slide .qr-row .qr-block .qr-caption strong {
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .closing-slide .closing-tag {
+      color: var(--text-dim);
+      font-size: 1em;
+      letter-spacing: 0.04em;
+    }
+
+    /* Repo QR — Tonight + Mingle slides */
+    .repo-qr {
+      position: absolute;
+      right: 7%;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: center;
+      width: 220px;
+    }
+    .repo-qr .qr-caption {
+      margin-top: 0.9em;
+      font-size: 0.9em;
+      color: var(--text-body);
+      line-height: 1.35;
+    }
+    .repo-qr .qr-caption strong {
+      color: var(--accent);
+      font-weight: 700;
+    }
+    /* Give bar-content room when a repo QR shares the slide */
+    .has-repo-qr .bar-content { max-width: 64%; }
+
+    /* ===== AUDIENCE CHECK SLIDE ===== */
+    .audience-slide p.fragment {
+      font-size: 1.1em;
+      margin: 0.6em 0;
+    }
+
+    /* ===== SINCE-LAST-MEETUP SLIDE ===== */
+    .changelog-list { font-size: 0.75em; line-height: 2.0; text-align: left; max-width: 950px; margin: 0 auto; }
+    .changelog-list li { padding-left: 1.2em; }
+    .changelog-list .date { color: var(--text-dim); font-size: 0.85em; margin-left: 0.3em; }
+
+    /* Reveal.js progress + controls — color match */
+    .reveal .progress { color: var(--accent); }
+    .reveal .controls { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- ============================================ -->
+      <!-- SLIDE 1: TITLE (social-card style)           -->
+      <!-- ============================================ -->
+      <section class="title-slide" data-background-color="#f7f3ec">
+        <div class="title-content">
+          <h1>Claude Code<br>ABQ Meetup</h1>
+          <p class="tonight">TONIGHT</p>
+          <p class="subtitle">See inside Marty Bonacci's AI coding setup:<br>plugins, skills, agents, commands,<br>mobile workflow, and more.</p>
+        </div>
+        <div class="qr-block">
+          <div id="qr1"></div>
+          <p class="qr-caption">Register at<br><strong>ClaudeABQ.dev</strong></p>
+        </div>
+        <aside class="notes">Welcome. Glad you're here. We meet monthly to share what's actually working with AI-assisted dev. QR on the right is the Luma event link — already-registered folks can ignore; if a friend wants to come next month, point them to claudeabq.dev.</aside>
+      </section>
+
+      <!-- ============================================ -->
+      <!-- SLIDE 2: WHY WE'RE HERE                      -->
+      <!-- ============================================ -->
+      <section class="with-bar" data-background-color="#f7f3ec">
+        <div class="bar-content">
+          <h2>Why We're Here</h2>
+          <p style="font-size:1.2em;"><strong>We share what actually works.</strong></p>
+          <ul>
+            <li>Honest about what's working and what isn't — no hype, no marketing</li>
+            <li>We focus on Claude Code because it's the best tool right now.<br>Bring us something better and we'll try it.</li>
+            <li>Developers, non-developers, all levels — if you're curious, you belong here</li>
+          </ul>
+        </div>
+        <aside class="notes">Same mission every month. We're not a fan club. Claude Code is just what's winning right now — if something better shows up, we'll switch. Whether you write code for a living or you've never opened a terminal, there's a seat for you.</aside>
+      </section>
+
+      <!-- ============================================ -->
+      <!-- SLIDE 3: AUDIENCE CHECK                      -->
+      <!-- ============================================ -->
+      <section class="with-bar audience-slide" data-background-color="#f7f3ec">
+        <div class="bar-content">
+          <h2>Quick show of hands…</h2>
+          <p class="fragment">Who is a software developer?</p>
+          <p class="fragment">Who uses AI agents to write code?</p>
+          <p class="fragment">Who uses Claude Code?</p>
+          <p class="fragment">What other AI tools do you use?</p>
+        </div>
+        <aside class="notes">Quick show of hands. First three are show-of-hands; last one is open — let folks call out tools, get a read on what the room is using beyond Claude Code. Keep it fast — 30–45 seconds total.</aside>
+      </section>
+
+      <!-- ============================================ -->
+      <!-- SLIDE 4: DEEP DIVE CODING                    -->
+      <!-- ============================================ -->
+      <section class="with-bar dd-slide" data-background-color="#f7f3ec">
+        <div class="bar-content">
+          <h2>Deep Dive Bootcamps</h2>
+          <p style="font-style:italic; color: var(--text-dim); margin-top:-0.3em;">powered by CNM Ingenuity</p>
+          <p style="margin-top:1em;"><span class="dd-badge">Web Development &amp; AI Tools</span></p>
+          <p style="margin-top:0.9em;">12-week full-stack bootcamp — now with AI-assisted development</p>
+          <p style="margin-top:0.4em; color: var(--text-dim); font-size:0.9em;">Right here at CNM STEMulus Center, Downtown Albuquerque</p>
+          <p style="margin-top:1.1em;"><a href="https://deepdivecoding.com">deepdivecoding.com</a></p>
+        </div>
+        <aside class="notes">Quick shout-out to our hosts. Deep Dive Bootcamps is the reason we have a room. 12-week full-stack bootcamp with AI-assisted dev baked in. June 1 cohort kicks off soon — if you're curious about switching into tech or leveling up, talk to me at the mingle.</aside>
+      </section>
+
+      <!-- ============================================ -->
+      <!-- SLIDE 5: SINCE OUR LAST MEETUP               -->
+      <!-- ============================================ -->
+      <section class="with-bar" data-background-color="#f7f3ec">
+        <div class="bar-content">
+          <h3>Since Our Last Meetup <span class="dim-text" style="font-size:0.7em;">(Apr 9)</span></h3>
+          <ul class="changelog-list">
+            <li><strong>Auto Mode for Max</strong> — auto mode now runs on Max plans without any flag <span class="date">(Apr 16)</span></li>
+            <li><strong>/ultrareview</strong> — parallel multi-agent PR review; CLI subcommand for CI <span class="date">(Apr 16 → Apr 28)</span></li>
+            <li><strong>Agent View + /goal</strong> — claude agents dashboard; /goal drives Claude across turns to a completion condition <span class="date">(May 11, Research Preview)</span></li>
+            <li><strong>Claude Design</strong> — new Anthropic Labs visual collaboration product <span class="date">(Apr 17)</span></li>
+          </ul>
+        </div>
+        <aside class="notes">Rapid fire. Auto Mode for Max — as of April 16, Max plans get Auto Mode without any flag; smart approval layer just runs. /ultrareview kicks off parallel agent PR review — and as of late April there's a CLI subcommand you can drop into CI. Agent View landed May 11 as a research preview — `claude agents` gives you one dashboard for every session, and /goal lets Claude work across turns until a condition is met. And Claude Design dropped from Anthropic Labs on April 17 — visual collaboration tool, worth a look.</aside>
+      </section>
+
+      <!-- ============================================ -->
+      <!-- SLIDE 6: CALL FOR PRESENTERS (early ask)     -->
+      <!-- ============================================ -->
+      <section class="with-bar" data-background-color="#f7f3ec">
+        <div class="bar-content">
+          <h2>Call for Presenters</h2>
+          <p style="font-size:1.2em;"><strong>Show us something we can use.</strong></p>
+          <ul>
+            <li>About 30 minutes</li>
+            <li>We want workflows, tools, and techniques<br>that developers can implement NOW</li>
+            <li>You don't need to be an expert — share what's working for you</li>
+            <li><strong>Talk to Marty</strong></li>
+          </ul>
+        </div>
+        <aside class="notes">Quick interrupt before we dive in — we're always looking for presenters. If a workflow, tool, or technique is working for you, please come share it. Doesn't have to be polished. Talk to me tonight or hit the contact form on claudeabq.dev. I'll repeat this at the end too.</aside>
+      </section>
+
+      <!-- ============================================ -->
+      <!-- SLIDE 7: TONIGHT'S AGENDA                    -->
+      <!-- ============================================ -->
+      <section class="with-bar has-repo-qr" data-background-color="#f7f3ec">
+        <div class="bar-content">
+          <h2>Tonight</h2>
+          <div class="presenter-card">
+            <h3>A look inside my Claude Code setup</h3>
+            <p class="tagline">status line · plugins · skills · commands · agents · mobile workflow</p>
+          </div>
+          <div class="presenter-card stretch-card">
+            <h3>Power Pages + Liquid <span class="stretch-label">IF WE HAVE TIME</span></h3>
+            <p class="tagline">Tim bet me I can't build a Claude Code plugin for it live.</p>
+          </div>
+        </div>
+        <div class="repo-qr">
+          <div id="qr-repo-tonight"></div>
+          <p class="qr-caption">Marty's setup<br><strong>Follow along &rarr;</strong></p>
+        </div>
+        <aside class="notes">Two parts tonight. First — I'm opening up my Claude Code setup and walking you through what I actually run every day. Status line, plugins, skills, commands, agents, and how I drive it from my phone. Honest about what's earned its keep and what got cut. Second — if we have time — Tim bet me I can't build a Claude Code plugin from scratch for Power Pages + Liquid. Live. A framework I've never touched. You'll see how I'd approach a brand-new plugin cold. Win or lose, you get the real workflow.</aside>
+      </section>
+
+      <!-- ============================================ -->
+      <!-- PRESENTER CONTENT GOES HERE                  -->
+      <!-- =============================================-->
+      <!-- The live look inside Marty's setup is not in slides.                              -->
+      <!-- Drive it from the terminal / Claude Code itself. When wrapping up, advance        -->
+      <!-- to the closing run below (Mingle → Call for Presenters → claudeabq.dev).          -->
+      <!-- ============================================ -->
+
+      <!-- ============================================ -->
+      <!-- CLOSING 1: CALL FOR PRESENTERS               -->
+      <!-- ============================================ -->
+      <section class="with-bar" data-background-color="#f7f3ec">
+        <div class="bar-content">
+          <h2>Call for Presenters</h2>
+          <p style="font-size:1.2em;"><strong>Show us something we can use.</strong></p>
+          <ul>
+            <li>About 30 minutes</li>
+            <li>We want workflows, tools, and techniques<br>that developers can implement NOW</li>
+            <li>You don't need to be an expert — share what's working for you</li>
+            <li><strong>Talk to Marty</strong></li>
+          </ul>
+        </div>
+        <aside class="notes">Reminder from earlier — we need presenters. I've been the one talking three out of four months and that's not how this is supposed to work. If a workflow, tool, or technique is working for you, please come share it. Doesn't have to be polished. Talk to me tonight or hit the contact form on claudeabq.dev.</aside>
+      </section>
+
+      <!-- ============================================ -->
+      <!-- CLOSING 2: FINAL — leave up for the evening  -->
+      <!-- ============================================ -->
+      <section class="closing-slide" data-background-color="#f7f3ec">
+        <div class="closing-card">
+          <h2>Mingle. Share. Help each other.</h2>
+          <div class="qr-row">
+            <div class="qr-block">
+              <div id="qr2" class="qr-svg"></div>
+              <p class="qr-caption">Register at<br><strong>ClaudeABQ.dev</strong></p>
+            </div>
+            <div class="qr-block">
+              <div id="qr-repo-closing" class="qr-svg"></div>
+              <p class="qr-caption">Tonight's Repo<br><strong>Take it home &rarr;</strong></p>
+            </div>
+          </div>
+          <p class="closing-tag">See you next month.</p>
+        </div>
+        <aside class="notes">Leave this up for the rest of the evening. Headline calls people into social time; left QR locks in next month's RSVP at claudeabq.dev, right QR takes tonight's repo home. See you in June.</aside>
+      </section>
+
+    </div><!-- .slides -->
+  </div><!-- .reveal -->
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.min.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      transition: 'fade',
+      backgroundTransition: 'fade',
+      plugins: [RevealNotes],
+      width: 1920,
+      height: 1080,
+      margin: 0.04
+    });
+
+    // Render QR — black on cream, no white box (matches the social card aesthetic)
+    function makeQR(targetId, url, cellSize) {
+      var qr = qrcode(0, 'M');
+      qr.addData(url);
+      qr.make();
+      var el = document.getElementById(targetId);
+      if (!el) return;
+      el.innerHTML = qr.createSvgTag(cellSize || 5);
+      var svg = el.querySelector('svg');
+      if (svg) {
+        svg.style.background = 'transparent';
+        svg.style.padding = '0';
+      }
+    }
+
+    var REPO_URL = 'https://github.com/MartyBonacci/claude-code-abq-5-14-26';
+    makeQR('qr1', 'https://claudeabq.dev', 5);
+    makeQR('qr2', 'https://claudeabq.dev', 5);
+    makeQR('qr-repo-tonight', REPO_URL, 5);
+    makeQR('qr-repo-closing', REPO_URL, 5);
+  </script>
+</body>
+</html>
