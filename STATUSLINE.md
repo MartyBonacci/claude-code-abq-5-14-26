@@ -152,7 +152,9 @@ fi
 
 </details>
 
-If you want these after running `npx @chongdashu/cc-statusline install`, you'll need to graft them into the generated `~/.claude/statusline.sh` by hand — or wait to see if the package picks them up upstream.
+The full script (with all customizations already applied) is in this repo as [`statusline.sh`](statusline.sh) — you can drop it directly into `~/.claude/statusline.sh` instead of grafting by hand.
+
+If you'd rather start from the generated version, run `npx @chongdashu/cc-statusline install` and apply the snippets above manually.
 
 ---
 
