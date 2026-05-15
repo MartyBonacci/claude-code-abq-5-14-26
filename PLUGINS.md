@@ -140,3 +140,28 @@ Plugins live in `~/.claude/plugins/`. Each one can contribute any combination of
 - **MCP servers** — external tool servers that give Claude new capabilities
 
 The official marketplace is `anthropics/claude-plugins-official` on GitHub. Anyone can publish a plugin by hosting a `marketplace.json` and pointing Claude at it.
+
+---
+
+## 🛠 Built at this meetup
+
+**[`power-pages-liquid-js-plugin`](https://github.com/MartyBonacci/power-pages-liquid-js-plugin)** — Stops Claude from writing Shopify Liquid syntax into Microsoft Power Pages Liquid templates.
+
+The problem: Power Pages uses a [DotLiquid](https://github.com/dotliquid/dotliquid)-based dialect that talks to Dataverse. It shares base Liquid grammar with Shopify but has a completely different tag/object/filter vocabulary. Claude's training data is dominated by Shopify Liquid, so it reliably reaches for things like `{% paginate %}`, `product.*`, and `| money` — none of which exist in Power Pages.
+
+Two-layer defense:
+
+| Layer | What it does |
+|-------|-------------|
+| Skill (`power-pages-liquid`) | Loads the full Power Pages tag/object/filter reference whenever Claude touches a `.liquid` file |
+| PreToolUse hook | Hard-blocks Write/Edit on `.liquid` files containing Shopify syntax — names every offender and its Power Pages replacement so Claude self-corrects on retry |
+| `/pp-liquid-lint` command | On-demand audit of existing files |
+
+**Install:**
+
+```bash
+claude plugin marketplace add MartyBonacci/power-pages-liquid-js-plugin
+claude plugin install power-pages-liquid
+```
+
+Requires `jq` (`brew install jq` / `sudo apt install jq`). If `jq` is missing the hook fails open — it logs a warning but never blocks your work.

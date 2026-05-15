@@ -13,7 +13,7 @@ If you scanned this QR from the room: welcome. Everything I show tonight lands h
   - my Claude Code config and `CLAUDE.md`
   - skills, plugins, agents, and slash commands
   - mobile workflow setup
-  - if time and luck cooperate: a Power Pages + Liquid plugin (Tim — this one's for you)
+  - [`power-pages-liquid-js-plugin`](https://github.com/MartyBonacci/power-pages-liquid-js-plugin) — built live at the meetup (Tim, this one's yours)
 
 ## tmux configs
 
