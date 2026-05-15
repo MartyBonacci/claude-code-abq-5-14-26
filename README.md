@@ -8,6 +8,7 @@ If you scanned this QR from the room: welcome. Everything I show tonight lands h
 
 - `index.html` — the slide deck. Open it in any browser; press `S` for speaker notes.
 - [`STATUSLINE.md`](STATUSLINE.md) — how to set up the statusline from the talk
+- [`PLUGINS.md`](PLUGINS.md) — all 28 active plugins, organized by what they do, with install commands
 - Coming during and after the talk:
   - my Claude Code config and `CLAUDE.md`
   - skills, plugins, agents, and slash commands
