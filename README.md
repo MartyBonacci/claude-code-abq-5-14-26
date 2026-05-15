@@ -15,6 +15,26 @@ If you scanned this QR from the room: welcome. Everything I show tonight lands h
   - mobile workflow setup
   - if time and luck cooperate: a Power Pages + Liquid plugin (Tim — this one's for you)
 
+## tmux configs
+
+Two companion repos for the mobile/multi-device workflow from the talk:
+
+**[tmux-dangerclaude-config](https://github.com/MartyBonacci/tmux-dangerclaude-config)** — tmux dotfiles with nine aliases that invoke Claude Code with `--dangerously-skip-permissions`, removing all confirmation prompts. Built for desktop, laptop, and phone (Termux over SSH + Tailscale). ⚠️ Don't use the danger aliases on machines with production credentials.
+
+```bash
+git clone https://github.com/MartyBonacci/tmux-dangerclaude-config
+cd tmux-dangerclaude-config && ./install.sh
+```
+
+**[tmux-auto-claude-config](https://github.com/MartyBonacci/tmux-auto-claude-config)** — same tmux setup but uses `--permission-mode auto` instead, the safer autonomous mode added in Claude Code v2.1.83+. Same multi-device setup (SSH + Tailscale), same session persistence — just without the "I accept all consequences" footgun.
+
+```bash
+git clone https://github.com/MartyBonacci/tmux-auto-claude-config
+cd tmux-auto-claude-config && ./install.sh
+```
+
+> Pick `auto` unless you have a specific reason to go full danger mode. Both require tmux 3.0+ and an Anthropic plan that supports the respective permission mode.
+
 ## About the meetup
 
 Claude Code ABQ is Albuquerque's AI-assisted development community. We meet monthly at the CNM STEMulus Center, hosted by Deep Dive Coding.
