@@ -7,6 +7,7 @@ If you scanned this QR from the room: welcome. Everything I show tonight lands h
 ## What's in here
 
 - `index.html` — the slide deck. Open it in any browser; press `S` for speaker notes.
+- [`STATUSLINE.md`](STATUSLINE.md) — how to set up the statusline from the talk
 - Coming during and after the talk:
   - my Claude Code config and `CLAUDE.md`
   - skills, plugins, agents, and slash commands
